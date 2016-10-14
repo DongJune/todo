@@ -1,0 +1,190 @@
+@import "mixin";
+@include usermobile(720px);
+body{
+  font-size: 16px;
+}
+.header{
+  width:100%;
+  height: 4rem;
+  background:url('../images/2.jpg') no-repeat center/cover;
+  position: fixed;
+z-index: 3;
+  .mengban{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(255,255,255,0.3);
+  }
+  .header-bottom{
+    height: 1rem;
+    width:100%;
+    position: absolute;
+    bottom: 0;
+    background: rgba(59, 182, 204, 0.13);
+  }
+  .nowtime{
+    height: 1rem;
+    width: 100%;
+    position: absolute;
+    @include top-bottom;
+    line-height: 1rem;
+    font-size: 0.5rem;
+    color: #fff;
+    text-align: center;
+  }
+}
+@font-face {
+  font-family: "iconfont";
+  src:url("../images/iconfont.woff");
+}
+.icon-comiiscaidan:before { content: "\e603"; }
+.icon-tianjiajia-copy:before { content: "\e601"; }
+.icon-shenghuo:before { content: "\e64d";color: #ff2443; }
+.icon-miyao:before { content: "\e655";color: #04c9cc; }
+.icon-xinxin:before { content: "\e637"; color: #cc2925;}
+.icon-left:before { content: "\e612"; }
+.icon-2dagou:before { content: "\e6bf"; }
+.list-icon{
+  height:0.7rem;
+width: 0.7rem;
+  font-family: "iconfont" !important;
+  text-align: center;
+  line-height: 0.7rem;
+  font-size:0.5rem;
+  color: #fff;
+  position: absolute;
+  left: 0;
+  top:0;
+}
+.lists{
+  font-family: "iconfont" !important;
+  height: 100%;
+  width: 2.4rem;
+  float: left;
+  font-size: 0.4rem;
+  color: #000;
+  line-height: 1rem;
+  text-align: center;
+  &.col{
+    color: #fff;
+  }
+}
+.add{
+  @include left-right;
+  position:fixed;
+  bottom: 0;
+   height: 1.5rem;
+  width: 1.5rem;
+  font-family: "iconfont";
+  font-size: 1.2rem;
+  color: #16b2cc;
+  z-index: 15;
+  &.hide{
+    display: none;
+  }
+}
+.love-content-box{
+  width: 100%;
+  position: absolute;
+  top:4rem;
+  overflow: hidden;
+  display: none;
+  .delete{
+  }
+ .love-content-inner{
+   height: 1.2rem;
+   width: 100%;
+   position: relative;
+   .delete,.fuyuan{
+     height:60%;
+     width: 0.6rem;
+     line-height: 0.72rem;
+     text-align: center;
+     @include top-bottom;
+     border-radius: 5px;
+  font-size: 0.25rem;
+     color: #fff;
+     display: none;
+     &.show{
+       display: block;
+     }
+   }
+   .delete{
+     background: #cc3d55;
+     right:0.2rem;
+   }
+   .fuyuan{
+     background: #04c9cc;
+     right:0.9rem;
+   }
+ }
+  .love-content{
+    float: left;
+    height: 100%;
+    width: 5rem;
+    overflow: hidden;
+    font-size: 0.4rem;
+    line-height: 1.2rem;
+    text-align: center;
+    color: #16b2cc;
+    border-bottom: 2px solid #16b2cc;
+    box-sizing: border-box;
+    background: #ffffff;
+  }
+  .del{
+    color: #ccc;
+  }
+  @keyframes move {
+    from{transform: translate3d(0,0,0)}
+    to{transform: translate3d(-2rem,0,0)}
+  }
+  .move{animation: move 1s ease both;}
+  .time{
+    float: left;
+    width: 2.2rem;
+    height: 100%;
+    background: #ffffff;
+    text-align: center;
+    line-height: 1.2rem;
+    font-size: 0.3rem;
+  }
+}
+.show{
+  display: block;
+}
+.write-box{
+  width: 100%;
+  height:12rem;
+  top:0;
+  left: 100%;
+  z-index: 7;
+  position: fixed;
+  transition: left 1s ease;
+  &.lefts{
+    left:0;
+  }
+  .top{
+    height: 1rem;
+    width: 100%;
+    background: #16b2cc;
+  }
+  .write-content{
+    height: 11rem;
+    width: 100%;
+    font-size:0.3rem ;
+    line-height: 0.8rem;
+    background: rgba(254, 253, 255, 0.66);
+    background-image: linear-gradient(rgba(255, 192, 180, 0.59) 50%, #fff 0);
+    background-size: auto 1.5rem;
+    background-origin: content-box;
+  }
+  .close{
+    font-size: 0.5rem;
+    font-family: "iconfont";
+    width: 1rem;
+    line-height:1rem;
+    color: #fff;
+    text-align: center;
+  }
+}
