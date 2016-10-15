@@ -72,29 +72,37 @@ body {
   font-family: "iconfont";
   src: url("../images/iconfont.woff"); }
 
-.icon-comiiscaidan:before {
-  content: "\e603"; }
+.icon-shanchu:before {
+  content: "\e634"; }
+
+.icon-huanyuan:before {
+  content: "\e6a1";
+  color: #16b2cc; }
 
 .icon-tianjiajia-copy:before {
   content: "\e601"; }
 
-.icon-shenghuo:before {
-  content: "\e64d";
-  color: #ff2443; }
+.icon-shanchu1:before {
+  content: "\e64c";
+  color: #ccc; }
+
+.icon-xihuan:before {
+  content: "\e61d";
+  color: #cc3d55; }
 
 .icon-miyao:before {
   content: "\e655";
-  color: #04c9cc; }
+  color: #16b2cc; }
 
-.icon-xinxin:before {
-  content: "\e637";
-  color: #cc2925; }
+.icon-shenghuo:before {
+  content: "\e64d";
+  color: #cc7084; }
 
-.icon-left:before {
+.icon-zuozuo:before {
+  content: "\e63a"; }
+
+.icon-dagou:before {
   content: "\e612"; }
-
-.icon-2dagou:before {
-  content: "\e6bf"; }
 
 .list-icon {
   height: 0.7rem;
@@ -162,11 +170,13 @@ body {
       .love-content-box .love-content-inner .delete.show, .love-content-box .love-content-inner .fuyuan.show {
         display: block; }
     .love-content-box .love-content-inner .delete {
-      background: #cc3d55;
-      right: 0.2rem; }
+      right: 0.2rem;
+      font-family: "iconfont";
+      font-size: 0.5rem; }
     .love-content-box .love-content-inner .fuyuan {
-      background: #04c9cc;
-      right: 0.9rem; }
+      font-family: "iconfont";
+      right: 0.9rem;
+      font-size: 0.5rem; }
   .love-content-box .love-content {
     float: left;
     height: 100%;

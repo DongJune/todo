@@ -25,7 +25,7 @@ $(function () {
     var left = null;
     var t;
     //判断localstorage中是否有数组字符串，无就加，有就写在界面中
-    if (localStorage.love) {
+    if (localStorage.love&&localStorage.live&&localStorage.secret) {
         arr0 = JSON.parse(localStorage.love)
         arr1 = JSON.parse(localStorage.live)
         arr2 = JSON.parse(localStorage.secret)
@@ -84,17 +84,17 @@ $(function () {
     function buile(arr, num) {
         if (arr) {
             $.each(arr, function (i, v) {
-                $("<div class='love-content-inner'><div class='love-content'>" + v.content + "</div><div class='time'>" + v.data + "</div> <div class='delete'>删除</div><div class='fuyuan'>复原</div></div>").appendTo($("  .love-content-box").eq(num))
+                $("<div class='love-content-inner'><div class='love-content'>" + v.content + "</div><div class='time'>" + v.data + "</div> <div class='delete icon-shanchu1'></div><div class='fuyuan icon-huanyuan'></div></div>").appendTo($("  .love-content-box").eq(num))
                 if (v.state == 1) {
                     $(".love-content-box").eq(num).find(".love-content").eq(i).addClass("del")
+                    v.del=1
                 }
 
             })
         }
     }
-
     $(".love-content-box").on("touchend", ".love-content-inner", function () {
-        $(".write-box .write-content").val($(this).find(".love-content").val())
+        $(".write-box .write-content").val($(this).find(".love-content").text())
         clearTimeout(t)
     })
     function hide() {
@@ -108,7 +108,7 @@ $(function () {
         left = e.originalEvent.changedTouches[0].pageX;
         index1 = $(this).index()
         t = setTimeout(hide, 500)
-        $(".write-content").val($(this).find(".love-content").text())
+        $(".write-box .write-content").val($(this).find(".love-content").text())
         if ($(this).find(".love-content").hasClass("move")) {
             $(this).find(".love-content").removeClass("move")
             $(this).find(".time").removeClass("move")
@@ -127,12 +127,14 @@ $(function () {
             var s = $(".love-content-box").index($(this).parent())
             if (index == 0) {
                 arr0[$(this).index()].state = 1
+
                 $(this).find(".love-content").addClass("del")
                 localStorage.love = JSON.stringify(arr0)
 
             }
             if (index == 1) {
                 arr1[$(this).index()].state = 1
+
                 $(this).find(".love-content").addClass("del")
                 localStorage.live = JSON.stringify(arr1)
             }
@@ -157,20 +159,21 @@ $(function () {
 //复原按钮的实现
     $(".love-content-box").on("touchend", ".fuyuan", function () {
         var pre = $(this).closest(".love-content-box")
+        clearTimeout(t)
         if (index == 0) {
-            arr0[$(".fuyuan").index($(this))].state = 0
-            pre.find(".love-content").eq(pre.find(".fuyuan").index($(this))).removeClass("del")
+            arr0[pre.find(".fuyuan").index($(this))].state = 0
             localStorage.love = JSON.stringify(arr0)
+            pre.find(".love-content").eq(pre.find(".fuyuan").index($(this))).removeClass("del")
         }
         if (index == 1) {
-            arr1[$(".fuyuan").index($(this))].state = 0
-            pre.find(".love-content").eq(pre.find(".fuyuan").index($(this))).removeClass("del")
+            arr1[pre.find(".fuyuan").index($(this))].state = 0
             localStorage.live = JSON.stringify(arr1)
+            pre.find(".love-content").eq(pre.find(".fuyuan").index($(this))).removeClass("del")
         }
         if (index == 2) {
-            arr2[$(".fuyuan").index($(this))].state = 0
-            pre.find(".love-content").eq(pre.find(".fuyuan").index($(this))).removeClass("del")
+            arr2[pre.find(".fuyuan").index($(this))].state = 0
             localStorage.secret = JSON.stringify(arr2)
+            pre.find(".love-content").eq(pre.find(".fuyuan").index($(this))).removeClass("del")
         }
         pre.find(".love-content").removeClass("move")
         pre.find(".time").removeClass("move")
@@ -202,10 +205,10 @@ $(function () {
     })
     //编辑
     $(".write-content").on("focus", function () {
-        $(".write-box").find(".close").removeClass("icon-left").addClass("icon-2dagou")
+        $(".write-box").find(".close").removeClass("icon-zuozuo").addClass("icon-dagou")
     })
     $(".write-content").on("blur", function () {
-        $(".write-box").find(".close").addClass("icon-left").removeClass("icon-2dagou")
+        $(".write-box").find(".close").addClass("icon-zuozuo").removeClass("icon-dagou")
     })
     $(".close").on("touchend", function () {
         if ($(".write-box").find(".close").hasClass("icon-left")) {
@@ -232,27 +235,29 @@ $(function () {
         }
     })
     $(".nowtime").text(days[day] + "  " + mous[mouth] + "  " + year)
-    // $(".list-icon").on("touchstart", function () {
-    //     // $(".del").closest(".love-content-inner").remove()
-    //     $.map(arr0, function (v, i) {
-    //         if (v.state == 1) {
-    //             arr0.splice(i, 1)
-    //         }
-    //
-    //     })
-    //     localStorage.love = JSON.stringify(arr0);
-    //     $.each(arr1, function (i, v) {
-    //         if (v.state == 1) {
-    //             arr1.splice(i, 1)
-    //         }
-    //     })
-    //     localStorage.live = JSON.stringify(arr1);
-    //     $.each(arr2, function (i, v) {
-    //         if (v.state == 1) {
-    //             arr2.splice(i, 1)
-    //         }
-    //     })
-    //     localStorage.secret = JSON.stringify(arr2);
-    // })
+    $(".list-icon").on("touchstart", function () {
+        $(".del").closest(".love-content-inner").remove()
+        var arr=[]
+        $.each(arr0,function (i,v){
+            if(v.state==0){arr.push(v)
+            }})
+        arr0.splice(0,arr0.length)
+        arr0=arr;
+        localStorage.love = JSON.stringify(arr0);
+        var arr3=[]
+        $.each(arr1,function (i,v){
+            if(v.state==0){arr3.push(v)
+            }})
+        arr1.splice(0,arr1.length)
+        arr1=arr3;
+        localStorage.live = JSON.stringify(arr1);
+        var arr4=[]
+        $.each(arr1,function (i,v){
+            if(v.state==0){arr4.push(v)
+            }})
+        arr2.splice(0,arr2.length)
+        arr2=arr4;
+        localStorage.secret = JSON.stringify(arr2);
+    })
 
 })
